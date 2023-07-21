@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Person {
+public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -24,15 +24,11 @@ public class Person {
     String emailId;
     @Enumerated(EnumType.STRING)
     Gender gender;
-    boolean dose1Taken;
-    boolean dose2Taken;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
-    List<Dose> dosesTaken = new ArrayList<>();
-
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
-    Certificate certificate;
-
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     List<Appointment> appointments = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn
+    VaccinationCenter center;
 }
